@@ -22,7 +22,7 @@ class Cameo(object):
 
             self._face_tracker.update(frame)
             faces = self._face_tracker.faces
-            rects.swap_rects(frame, frame, [face.face_rect for face in faces])
+            # rects.swap_rects(frame, frame, [face.face_rect for face in faces])
 
             filters.stroke_edges(frame, frame)
             self._curve_filter.apply(frame, frame)

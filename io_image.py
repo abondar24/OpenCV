@@ -4,7 +4,7 @@ import os
 
 image = cv2.imread('hard.jpg')
 
-cv2.imwrite('president.png', image)
+cv2.imwrite('president.jpg', image)
 
 gray_image = cv2.imread('hard.jpg', cv2.CV_LOAD_IMAGE_GRAYSCALE)
 cv2.imwrite('pr1.png', gray_image)
