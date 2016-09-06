@@ -1,5 +1,6 @@
 import cv2
 
+
 def outline_rect(image, rect, color):
     if rect is None:
         return

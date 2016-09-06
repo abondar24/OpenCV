@@ -11,7 +11,7 @@ class Cameo(object):
         self._capture_manager = CaptureManager(cv2.VideoCapture(0), self._window_manager, True)
         self._face_tracker = FaceTracker()
         self._should_draw_debug_rects = False
-        self._curve_filter  = filters.BlurFilter() # can use any of applied filters
+        self._curve_filter = filters.EmbossFilter()  # can use any of applied filters
 
     def run(self):
         self._window_manager.create_window()
@@ -22,7 +22,7 @@ class Cameo(object):
 
             self._face_tracker.update(frame)
             faces = self._face_tracker.faces
-            # rects.swap_rects(frame, frame, [face.face_rect for face in faces])
+            rects.swap_rects(frame, frame, [face.face_rect for face in faces])
 
             filters.stroke_edges(frame, frame)
             self._curve_filter.apply(frame, frame)
@@ -45,18 +45,17 @@ class Cameo(object):
         :return:
         """
 
-        if keycode == 32: # space
+        if keycode == 32:  # space
             self._capture_manager.write_image('screenshot.png')
-        elif keycode == 9: # tab
+        elif keycode == 9:  # tab
             if not self._capture_manager.is_writing_video:
                 self._capture_manager.start_writing_video('screencast.avi')
             else:
                 self._capture_manager.stop_writing_video()
-        elif keycode == 120: # x
+        elif keycode == 120:  # x
             self._should_draw_debug_rects = not self._should_draw_debug_rects
-        elif keycode == 27: # escape
+        elif keycode == 27:  # escape
             self._window_manager.destroy_window()
-
 
 
 if __name__=="__main__":
