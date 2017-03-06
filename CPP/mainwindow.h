@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include<QImage>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +27,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    cv::Mat image;
 };
 
 #endif // MAINWINDOW_H
