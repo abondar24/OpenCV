@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<iostream>
+#include "colordetecor.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,22 +15,22 @@ MainWindow::~MainWindow(){
 
 void MainWindow::on_pushButton_clicked(){
 
-   QString fName = QFileDialog::getOpenFileName(this,
-                                                tr("Open Image"),".",
-                                                tr("Image Files (*.png *.jpg *.jpeg *.bmp)"));
+    QString fName = QFileDialog::getOpenFileName(this,
+                                                 tr("Open Image"),".",
+                                                 tr("Image Files (*.png *.jpg *.jpeg *.bmp)"));
 
 
-   image = cv::imread(fName.toStdString());
-   cv::namedWindow("Original Image");
-   cv::imshow("Original Image", image);
+    image = cv::imread(fName.toStdString());
+    cv::namedWindow("Original Image");
+    cv::imshow("Original Image", image);
 }
 
 void MainWindow::on_pushButton_2_clicked(){
-   cv::flip(image,image,1);
-   // change color channel ordering
-   cv::cvtColor(image,image,CV_BGR2RGB);
+    cv::flip(image,image,1);
+    // change color channel ordering
+    cv::cvtColor(image,image,CV_BGR2RGB);
 
-   displayImage(image);
+    displayImage(image);
 }
 
 
@@ -37,13 +38,13 @@ void MainWindow::on_pushButton_3_clicked(){
 
     salt(image,3000);
 
-     displayImage(image);
+    displayImage(image);
 }
 
 void MainWindow::on_pushButton_4_clicked(){
-   colorReduce(image);
+    colorReduce(image);
 
-   displayImage(image);
+    displayImage(image);
 }
 
 void MainWindow::on_pushButton_5_clicked(){
@@ -68,13 +69,15 @@ void MainWindow::on_pushButton_7_clicked(){
     displayImage(result);
 }
 
+
 void MainWindow::on_pushButton_8_clicked(){
-    cv::Mat result;
-    result.create(image.size(), image.type());
-    roiDemo(image);
+    ColorDetecor cd;
+
+    cd.setTargetColor(130,150,230);
+
+    cv::Mat result = cd.process(image);
     displayImage(result);
 }
-
 
 // n - number of pixels to overwrite
 void MainWindow::salt(cv::Mat &image, int n){
@@ -101,7 +104,7 @@ void MainWindow::salt(cv::Mat &image, int n){
 void MainWindow::colorReduce(cv::Mat &image, int div){
 
     if (image.isContinuous()){
-       //no padded pixels
+        //no padded pixels
         image.reshape(1,image.cols*image.rows);
     }
 
@@ -148,7 +151,7 @@ void MainWindow::colorReduce(cv::Mat &image, cv::Mat &result, int div){
 
     }
 
-  }
+}
 
 
 void MainWindow::colorReduceIter(cv::Mat &image, int div){
@@ -171,10 +174,10 @@ void MainWindow::colorReduceIter(cv::Mat &image, int div){
 }
 
 
- void MainWindow::sharpen(cv::Mat &image,cv::Mat &result){
+void MainWindow::sharpen(cv::Mat &image,cv::Mat &result){
 
-     // all rows except first and last
-     for (int j=1; j<image.rows-1; j++){
+    // all rows except first and last
+    for (int j=1; j<image.rows-1; j++){
         const uchar* previous = image.ptr<const uchar>(j-1);
         const uchar* current = image.ptr<const uchar>(j);
         const uchar* next = image.ptr<const uchar>(j+1);
@@ -186,47 +189,39 @@ void MainWindow::colorReduceIter(cv::Mat &image, int div){
         }
     }
 
-     // border pixels
-     result.row(0).setTo(cv::Scalar(0));
-     result.row(result.rows-1).setTo(cv::Scalar(0));
-     result.col(0).setTo(cv::Scalar(0));
-     result.col(result.cols-1).setTo(cv::Scalar(0));
+    // border pixels
+    result.row(0).setTo(cv::Scalar(0));
+    result.row(result.rows-1).setTo(cv::Scalar(0));
+    result.col(0).setTo(cv::Scalar(0));
+    result.col(result.cols-1).setTo(cv::Scalar(0));
 
- }
-
-
- void MainWindow::sharpen2D(cv::Mat &image,cv::Mat &result){
-
-     cv::Mat kernel(3,3,CV_32F,cv::Scalar(0));
-     kernel.at<float>(1,1) = 5.0;
-     kernel.at<float>(0,1) = -1.0;
-     kernel.at<float>(2,1) = -1.0;
-     kernel.at<float>(1,1) = -1.0;
-     kernel.at<float>(1,2) = -1.0;
-
- }
+}
 
 
- void MainWindow::roiDemo(cv::Mat &image){
-     cv::Mat logo =  cv::imread("/home/abondar/Downloads/ss.jpg");
+void MainWindow::sharpen2D(cv::Mat &image,cv::Mat &result){
 
-     cv::Mat imageROI = image(cv::Rect(image.cols,image.rows, logo.cols,logo.rows));
-     cv::Mat mask =  cv::imread("/home/abondar/Downloads/ss.jpg",0);
+    cv::Mat kernel(3,3,CV_32F,cv::Scalar(0));
+    kernel.at<float>(1,1) = 5.0;
+    kernel.at<float>(0,1) = -1.0;
+    kernel.at<float>(2,1) = -1.0;
+    kernel.at<float>(1,1) = -1.0;
+    kernel.at<float>(1,2) = -1.0;
 
-     logo.copyTo(imageROI,mask);
+}
 
- }
 
- void MainWindow::displayImage(cv::Mat &image){
-     QImage img ((const unsigned char*)(image.data),
-                         image.cols, image.rows, QImage::Format_RGB888);
+void MainWindow::displayImage(cv::Mat &image){
+    QImage img ((const unsigned char*)(image.data),
+                image.cols, image.rows, QImage::Format_RGB888);
 
-     //display on label
-     ui->label->setPixmap(QPixmap::fromImage(img));
+    //display on label
+    ui->label->setPixmap(QPixmap::fromImage(img));
 
-     //resize label
-     ui->label->resize(ui->label->pixmap()->size());
- }
+    //resize label
+    ui->label->resize(ui->label->pixmap()->size());
+}
+
+
 
 
 

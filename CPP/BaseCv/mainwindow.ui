@@ -128,7 +128,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>ROI</string>
+     <string>Change color</string>
     </property>
    </widget>
   </widget>

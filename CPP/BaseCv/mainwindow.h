@@ -24,7 +24,7 @@ public:
     void colorReduceIter(cv::Mat &image, int div =64);
     void sharpen(cv::Mat &image,cv::Mat &result);
     void sharpen2D(cv::Mat &image,cv::Mat &result);
-    void roiDemo(cv::Mat &image);
+
 
 
     ~MainWindow();
@@ -43,6 +43,7 @@ private slots:
     void on_pushButton_6_clicked();
 
     void on_pushButton_7_clicked();
+
 
     void on_pushButton_8_clicked();
 
