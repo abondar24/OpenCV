@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include<iostream>
 #include "colordetecor.h"
+#include "histogram1d.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -78,6 +79,39 @@ void MainWindow::on_pushButton_8_clicked(){
     cv::Mat result = cd.process(image);
     displayImage(result);
 }
+
+void MainWindow::on_pushButton_9_clicked(){
+    Histogram1D hist;
+    cv::Mat histImg = hist.getHistogramImage(image);
+
+    cv::namedWindow("Histogram");
+    cv::imshow("Histogram",histImg);
+}
+
+
+void MainWindow::on_pushButton_10_clicked(){
+    Histogram1D hist;
+
+    cv::Mat lut = hist.produceLookUpTable();
+
+    cv::Mat lutRes = hist.applyLookUp(image,lut);
+
+    displayImage(lutRes);
+}
+
+void MainWindow::on_pushButton_11_clicked(){
+    Histogram1D hist;
+
+    cv::Mat stretch = hist.stretch(image,100);
+    displayImage(stretch);
+
+     cv::Mat histImg = hist.getHistogramImage(stretch);
+    cv::namedWindow("Histogram");
+    cv::imshow("Histogram",hist.getHistogramImage(histImg));
+
+}
+
+
 
 // n - number of pixels to overwrite
 void MainWindow::salt(cv::Mat &image, int n){
@@ -220,8 +254,3 @@ void MainWindow::displayImage(cv::Mat &image){
     //resize label
     ui->label->resize(ui->label->pixmap()->size());
 }
-
-
-
-
-

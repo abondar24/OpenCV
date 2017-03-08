@@ -25,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        colordetecor.cpp
+        colordetecor.cpp \
+    histogram1d.cpp
 
 
 HEADERS  += mainwindow.h\
-            colordetecor.h
+            colordetecor.h \
+    histogram1d.h
 
 
 
