@@ -26,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp\
         colordetecor.cpp \
-    histogram1d.cpp
+    histogram1d.cpp \
+    morphofeatures.cpp
 
 
 HEADERS  += mainwindow.h\
             colordetecor.h \
-    histogram1d.h
+    histogram1d.h \
+    morphofeatures.h
 
 
 

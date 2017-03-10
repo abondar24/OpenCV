@@ -144,7 +144,7 @@ void MainWindow::on_pushButton_15_clicked(){
     corners = morpho.getCorners(image);
 
     morpho.drawOnImage(corners,image);
-    displayImage(corners);
+    displayImage(image);
 }
 
 
