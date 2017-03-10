@@ -27,13 +27,15 @@ SOURCES += main.cpp\
         mainwindow.cpp\
         colordetecor.cpp \
     histogram1d.cpp \
-    morphofeatures.cpp
+    morphofeatures.cpp \
+    laplacianzc.cpp
 
 
 HEADERS  += mainwindow.h\
             colordetecor.h \
     histogram1d.h \
-    morphofeatures.h
+    morphofeatures.h \
+    laplacianzc.h
 
 
 

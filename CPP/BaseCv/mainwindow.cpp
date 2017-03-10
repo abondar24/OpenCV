@@ -4,6 +4,7 @@
 #include "colordetecor.h"
 #include "histogram1d.h"
 #include "morphofeatures.h"
+#include "laplacianzc.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -106,7 +107,7 @@ void MainWindow::on_pushButton_11_clicked(){
     cv::Mat stretch = hist.stretch(image,100);
     displayImage(stretch);
 
-     cv::Mat histImg = hist.getHistogramImage(stretch);
+    cv::Mat histImg = hist.getHistogramImage(stretch);
     cv::namedWindow("Histogram");
     cv::imshow("Histogram",hist.getHistogramImage(histImg));
 
@@ -144,7 +145,82 @@ void MainWindow::on_pushButton_15_clicked(){
     corners = morpho.getCorners(image);
 
     morpho.drawOnImage(corners,image);
-    displayImage(corners);
+    displayImage(image);
+}
+
+
+void MainWindow::on_pushButton_16_clicked(){
+    cv::Mat result;
+
+    cv::blur(image,result,cv::Size(5,5));
+    displayImage(result);
+}
+
+void MainWindow::on_pushButton_17_clicked(){
+    cv::Mat reducedImage;
+
+    cv::pyrDown(image,reducedImage);
+    displayImage(reducedImage);
+
+}
+
+
+void MainWindow::on_pushButton_18_clicked(){
+    cv::Mat resizedImage;
+
+    cv::resize(image,resizedImage,
+               cv::Size(image.cols/3,image.rows/3));
+    displayImage(resizedImage);
+}
+
+
+
+void MainWindow::on_pushButton_19_clicked(){
+    cv::Mat result;
+
+    cv::medianBlur(image,result,5);
+    displayImage(result);
+}
+
+
+
+void MainWindow::on_pushButton_20_clicked(){
+    cv::Mat sobelX;
+    cv::Sobel(image,sobelX,CV_8U,1,0,3,0.4,128);
+    displayImage(sobelX);
+
+}
+
+
+void MainWindow::on_pushButton_21_clicked(){
+    cv::Mat sobelY;
+    cv::Sobel(image,sobelY,CV_8U,0,1,3,0.4,128);
+    displayImage(sobelY);
+}
+
+
+void MainWindow::on_pushButton_22_clicked(){
+    LaplacianZC laplacianZC;
+    laplacianZC.setAperture(7);
+
+    cv::Mat flap = laplacianZC.computeLaplacian(image);
+
+    cv::Mat laplace;
+
+    laplace = laplacianZC.getLaplacianImage();
+    displayImage(laplace);
+
+}
+
+
+void MainWindow::on_pushButton_23_clicked(){
+     LaplacianZC laplacianZC;
+     laplacianZC.setAperture(7);
+     cv::Mat flap= laplacianZC.computeLaplacian(image);
+
+     cv::Mat zeros = laplacianZC.getZeroCrossings();
+
+     displayImage(zeros);
 }
 
 
@@ -289,4 +365,3 @@ void MainWindow::displayImage(cv::Mat &image){
     //resize label
     ui->label->resize(ui->label->pixmap()->size());
 }
-

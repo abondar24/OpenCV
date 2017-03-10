@@ -222,6 +222,110 @@
      <string>Corners</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_16">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>270</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Blur FIlter</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_17">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>310</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PyrDown FIlter</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_18">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>350</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resize FIlter</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_19">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>30</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Median Blur</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_20">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>70</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SobelX</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_21">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>110</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SobelY</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_22">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>150</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Laplacian</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_23">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>190</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> Zero-crossings</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
