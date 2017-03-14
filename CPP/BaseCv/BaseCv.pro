@@ -28,14 +28,16 @@ SOURCES += main.cpp\
         colordetecor.cpp \
     histogram1d.cpp \
     morphofeatures.cpp \
-    laplacianzc.cpp
+    laplacianzc.cpp \
+    linesfinder.cpp
 
 
 HEADERS  += mainwindow.h\
             colordetecor.h \
     histogram1d.h \
     morphofeatures.h \
-    laplacianzc.h
+    laplacianzc.h \
+    linesfinder.h
 
 
 

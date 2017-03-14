@@ -5,6 +5,7 @@
 #include "histogram1d.h"
 #include "morphofeatures.h"
 #include "laplacianzc.h"
+#include "linesfinder.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -223,6 +224,28 @@ void MainWindow::on_pushButton_23_clicked(){
      displayImage(zeros);
 }
 
+void MainWindow::on_pushButton_24_clicked(){
+    cv::Mat counturs;
+    cv::Canny(image,counturs,125,350);
+
+    displayImage(counturs);
+}
+
+void MainWindow::on_pushButton_25_clicked(){
+    LinesFinder finder;
+
+      cv::Mat counturs;
+    // set probabilistic hough params
+    finder.setLineLengthAndGap(100,20);
+    finder.setMinVote(80);
+
+    // detect and draw lines
+    std::vector<cv::Vec4i> lines = finder.findLines(counturs);
+    finder.drawDetectedLines(image);
+
+
+    displayImage(image);
+}
 
 // n - number of pixels to overwrite
 void MainWindow::salt(cv::Mat &image, int n){
@@ -365,3 +388,9 @@ void MainWindow::displayImage(cv::Mat &image){
     //resize label
     ui->label->resize(ui->label->pixmap()->size());
 }
+
+
+
+
+
+
